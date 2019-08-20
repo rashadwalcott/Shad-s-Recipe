@@ -1,0 +1,59 @@
+body {
+  background-image: url("main-background-xs.jpg");
+  margin: 0;
+  font-family: monospace;
+  /* display: grid;
+	grid-template-columns: 2fr 8fr; */
+}
+h1 {
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 2px maroon;
+}
+
+h3 {
+  text-align: center;
+  font-size: 30px;
+}
+
+p {
+  font-size: 25px;
+}
+.leftShow {
+  float: left;
+  width:50%;
+  height: auto;
+  color: white;
+
+}
+.rightShow {
+  float:right;
+  width:50%;
+  height: auto;
+  color: white;
+}
+
+
+.recipe {
+  border-radius: 5px;
+  height: 3rem;
+  width: 60%;
+  font-size: 25px;
+  font-family: monospace;
+  margin: 3px;
+  color: white;
+  text-shadow: 3px 2px black;
+
+}
+.ingredient {
+  font-size: 25px;
+}
+
+.like {
+  text-align: center;
+  
+}
