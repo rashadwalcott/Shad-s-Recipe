@@ -10,7 +10,7 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/1
   def show
-    render json: @ingredient, include: [:recipes]
+    render json: @ingredient
   end
 
   # POST /ingredients
@@ -46,6 +46,6 @@ class IngredientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ingredient_params
-      params.require(:ingredient).permit(:name)
+      params.require(:ingredient).permit(:name,:recipe_id)
     end
 end

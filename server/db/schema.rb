@@ -17,16 +17,15 @@ ActiveRecord::Schema.define(version: 20190819204616) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id"
     t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
+    t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20190819204616) do
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "image"
+    t.text "ingredients"
     t.text "directions"
     t.integer "likes"
     t.datetime "created_at", null: false
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20190819204616) do
   end
 
   add_foreign_key "comments", "recipes"
-  add_foreign_key "comments", "users"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
 end
