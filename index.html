@@ -3,10 +3,39 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Shad's Recipes</title>
-  <h1>Shad's Recipes</h1>
+  <div id='recipe-header' class= 'header'>
+      <img src="https://fontmeme.com/permalink/190820/92a4f203d29465c3ca371dd206d1a768.png" alt="recipe-header">
+
+    </div>
+  <!-- <h1>Shad's Recipes</h1> -->
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id=create-recipe>
+    <form id = "newrecipe" class = "add-new-recipe-form">
+
+      <h3> Add New Recipe </h3>
+
+      <label for="new-recipe">New Recipe</label>
+      <br>
+        <input type = "text" name="name",id="new-recipe" placeholder="Enter a new recipe...." class="input.text">
+          <br>
+           <br>
+        <input type = "text" name="ingredient",id="new-ingredient" placeholder="Enter an ingredient...." class="input.text">
+          <br>
+        <label for="new-image">Image</label>
+          <br>
+          <input type = "text" name="image",id="new-image" placeholder="Enter a recipe image URL...." class="input.text">
+            <br>
+      <label for="new-description">Description</label>
+          <br>
+        <input type = "text" name="description",id="new-description" placeholder="Give me some directions please...." class="input.text">
+          <br>
+      <input id = "add-recipe" type="submit" name="submit" value="Add New Recipe" class="submit">
+
+      </form>
+      <!-- <p style='text-align:center' >I need some more recipes!!! <button id='new-recipe-btn'>Add a new recipe!</button></p> -->
+      </div>
   <div class = "container">
 
 	<div id="list-panel" class = "leftShow">
@@ -15,9 +44,7 @@
 		</ul>
 	</div>
 	<div id="show-panel" class = 'rightShow'></div>
-    <!-- <ul id = 'ingredient-name'>
 
-      </ul> -->
 </div>
 	<script type="text/javascript" src="main.js"></script>
 </body>

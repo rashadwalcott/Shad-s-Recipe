@@ -2,8 +2,12 @@ body {
   background-image: url("main-background-xs.jpg");
   margin: 0;
   font-family: monospace;
+  color: white;
   /* display: grid;
 	grid-template-columns: 2fr 8fr; */
+}
+.header {
+  text-align: center;
 }
 h1 {
   color: white;
@@ -23,6 +27,24 @@ h3 {
 p {
   font-size: 25px;
 }
+#new-recipe-button {
+  font-size: 30px;
+}
+.add-new-recipe-form {
+  width: 80%;
+}
+
+.input-text {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+/* #create-recipe {
+  width:50%;
+  height: auto;
+
+} */
 .leftShow {
   float: left;
   width:50%;
@@ -55,5 +77,14 @@ p {
 
 .like {
   text-align: center;
-  
+  color: black;
+  display: inline-block;
+  font-size: 24px;
+  padding: 10px 10px;
+  border-radius: 20px;
+  border: 2px solid #008CBA;
+}
+.like:hover {
+  background-color: #008CBA;
+  color: white;
 }
