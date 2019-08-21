@@ -20,12 +20,12 @@ User.create(name: 'Rashad')
 User.create(name: 'Amrit')
 User.create(name: 'Cindy')
 #Creates Recipes
-Recipe.create(name: "Buffalo Chicken Pizza",image:"https://assets.bonappetit.com/photos/5a95890bfc24be1b59dc3c07/1:1/w_1536,h_1536,c_limit/0318-Go-Live-Buffalo-Chicken-Pizza.jpg",directions: "Place a rack in upper third of oven.
+Recipe.create(name: "Buffalo Chicken Pizza",likes: 0,image:"https://assets.bonappetit.com/photos/5a95890bfc24be1b59dc3c07/1:1/w_1536,h_1536,c_limit/0318-Go-Live-Buffalo-Chicken-Pizza.jpg",directions: "Place a rack in upper third of oven.
   Place a large cast-iron skillet on rack and preheat oven to 500° (or as high as your oven will go).
   Place pizza dough in a large bowl, pour a little oil over, and turn to coat.
   Cover bowl with plastic and let dough proof at room temperature while pan and oven heat up.")
 
-Recipe.create(name: "Buffalo Chicken Wrap",image:"https://images.media-allrecipes.com/userphotos/300x300/3321902.jpg",directions: "Heat the vegetable oil and butter in a large skillet over medium-high heat.
+Recipe.create(name: "Buffalo Chicken Wrap",likes: 0,image:"https://images.media-allrecipes.com/userphotos/300x300/3321902.jpg",directions: "Heat the vegetable oil and butter in a large skillet over medium-high heat.
    Place the chicken in the pan; cook and stir until the chicken is no longer pink in the center and the juices run clear, about 10 minutes.
    Remove the pan from the heat.
    Pour the hot sauce over the cooked chicken and toss to coat.
