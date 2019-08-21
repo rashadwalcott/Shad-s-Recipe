@@ -6,7 +6,7 @@ body {
   /* display: grid;
 	grid-template-columns: 2fr 8fr; */
 }
-.header {
+div.header {
   text-align: center;
 }
 h1 {
@@ -24,35 +24,41 @@ h3 {
   font-size: 30px;
 }
 
+
 p {
   font-size: 25px;
 }
-#new-recipe-button {
-  font-size: 30px;
-}
+
 .add-new-recipe-form {
   width: 80%;
 }
 
+div#create-recipe {
+width: 50%;
+}
 .input-text {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
 }
+
+button#delete {
+    margin: .7em;
+}
 /* #create-recipe {
   width:50%;
   height: auto;
 
 } */
-.leftShow {
+div.leftShow {
   float: left;
-  width:50%;
+  width:60%;
   height: auto;
   color: white;
 
 }
-.rightShow {
+div.rightShow {
   float:right;
   width:50%;
   height: auto;
@@ -75,7 +81,7 @@ p {
   font-size: 25px;
 }
 
-.like {
+button.like {
   text-align: center;
   color: black;
   display: inline-block;
@@ -84,7 +90,9 @@ p {
   border-radius: 20px;
   border: 2px solid #008CBA;
 }
-.like:hover {
+
+
+button.like:hover {
   background-color: #008CBA;
   color: white;
 }

@@ -10,8 +10,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1
   def show
-    #Includes ingredients when shown
-    render json: @recipe, include: [:ingredients]
+
+    render json: @recipe
   end
 
   # POST /recipes
@@ -47,6 +47,6 @@ class RecipesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def recipe_params
-      params.require(:recipe).permit(:name, :image, :directions)
+      params.require(:recipe).permit(:name, :image, :directions,:ingredients,:likes)
     end
 end

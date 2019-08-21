@@ -6,20 +6,17 @@ console.log("YEA BOY!")
 
  const recipesURL = 'http://localhost:3000/recipes';
  const commentsURL = 'http://localhost:3000/comments';
- const ingredientsURL = 'http://localhost:3000/ingredients';
- const recipeIngredientsURL = 'http://localhost:3000/recipe_ingredients';
- const userURL = 'http://localhost:3000/users';
  const recipeListDiv = document.getElementById('list-panel');
  const recipeInfoDiv = document.getElementById('show-panel');
  const recipeUL = document.getElementById('list');
  const form = document.getElementById('newrecipe');
- const ingredientUL = document.createElement('ul');
  const likeBtn = document.createElement('button');
  const recipeTitle = document.createElement('h3');
  const ingredientTitle = document.createElement('h3');
  const directionsTitle = document.createElement('h3');
  const recipeImage = document.createElement('img');
  const directionsParagraph = document.createElement('p');
+ const ingredientParagraph = document.createElement('p');
 
 
 
@@ -35,7 +32,13 @@ fetch(recipesURL)
             li.id = 'recipe-name';
             li.className = 'recipe'
             li.innerText = recipe.name;
+            let deleteBtn = document.createElement('button');
+            deleteBtn.id = 'delete';
+            deleteBtn.dataset.id = recipe.id;
+            deleteBtn.innerText = "✌🏾";
+            li.append(deleteBtn);
             recipeUL.append(li);
+
   })
 })
 
@@ -67,8 +70,9 @@ function recipeInfo(){
           recipeImage.style = "width:600px;height:500px";
           ingredientTitle.id = 'ingredient-title';
           ingredientTitle.innerText = "Ingredients";
-          ingredientUL.id = 'ingredient-name';
-
+          ingredientParagraph.id = 'recipe-ingredient';
+          ingredientParagraph.className = 'ingredient';
+          ingredientParagraph.innerText = recipeData.ingredients;
           directionsTitle.innerText = "Directions";
           directionsParagraph.innerText = recipeData.directions;
 
@@ -76,24 +80,9 @@ function recipeInfo(){
           recipeInfoDiv.append(recipeImage);
           recipeInfoDiv.append(likeBtn);
           recipeInfoDiv.append(ingredientTitle);
-          recipeInfoDiv.append(ingredientUL);
+          recipeInfoDiv.append(ingredientParagraph);
           recipeInfoDiv.append(directionsTitle);
           recipeInfoDiv.append(directionsParagraph);
-          ingredientUL.innerHTML = "";
-          recipeData.ingredients.forEach(ingredient => {
-            console.log(ingredient.name);
-              // ingredientUL.innerHTML = `
-              //   <li id="single-ingredient"> ${ingredient.name}</li>
-              // `
-            let ingredientLI = document.createElement('li');
-            ingredientLI.innerText = ingredient.name;
-            ingredientLI.id = 'single-ingredient';
-            ingredientLI.className = 'ingredient';
-            ingredientUL.append(ingredientLI);
-
-          })
-
-
 
 
         })
@@ -106,7 +95,7 @@ function addRecipe(event){
   // console.log('submitted form')
 
   let recipeName = event.target.name.value;
-  let ingredient = event.target.ingredient.value;
+  let ingredient = event.target.ingredients.value;
   let image = event.target.image.value;
   let directions = event.target.description.value;
 
@@ -126,12 +115,18 @@ function addRecipe(event){
     })
   }).then(res => res.json())
   .then(newRecipe => {
+    console.log(ingredient)
     console.log(newRecipe)
     let li = document.createElement('li');
     li.dataset.id = newRecipe.id;
     li.id = 'recipe-name';
     li.className = 'recipe'
     li.innerText = newRecipe.name;
+    let deleteBtn = document.createElement('button');
+    deleteBtn.id = 'delete';
+    deleteBtn.dataset.id = recipe.id;
+    deleteBtn.innerText = "✌🏾";
+    li.append(deleteBtn);
     recipeUL.append(li);
   })
 
