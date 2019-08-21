@@ -12,6 +12,7 @@ console.log("YEA BOY!")
  const recipeListDiv = document.getElementById('list-panel');
  const recipeInfoDiv = document.getElementById('show-panel');
  const recipeUL = document.getElementById('list');
+ const form = document.getElementById('newrecipe');
  const ingredientUL = document.createElement('ul');
  const likeBtn = document.createElement('button');
  const recipeTitle = document.createElement('h3');
@@ -39,11 +40,13 @@ fetch(recipesURL)
 })
 
 //EVENT LISTENERS
-recipeUL.addEventListener('click',recipeInfo)
+recipeUL.addEventListener('click',recipeInfo);
+form.addEventListener('submit',addRecipe);
 
 
 
 //FUNCTIONS
+//DISPLAYS RECIPE INFORMATION TO THE DOM
 function recipeInfo(){
 
   let id = event.target.dataset.id;
@@ -60,7 +63,7 @@ function recipeInfo(){
           likeBtn.dataset.id = recipeData.id;
           likeBtn.id = 'like-button';
           likeBtn.className = "like"
-          likeBtn.innerText = "❤️❤️❤️❤️❤️";
+          likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE: ${recipeData.likes} 🥓🍔🍟🍩🍖` ;
           recipeImage.style = "width:600px;height:500px";
           ingredientTitle.id = 'ingredient-title';
           ingredientTitle.innerText = "Ingredients";
@@ -96,6 +99,46 @@ function recipeInfo(){
         })
   }
 }//END OF recipeInfo FUNCTION
+
+//TAKES THE FORM VALUE AND ADD TO THE DATABASE
+function addRecipe(event){
+  event.preventDefault();
+  // console.log('submitted form')
+
+  let recipeName = event.target.name.value;
+  let ingredient = event.target.ingredient.value;
+  let image = event.target.image.value;
+  let directions = event.target.description.value;
+
+  //FETCH FOR ADDING A RECIPE
+  fetch(recipesURL,{
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      name: recipeName,
+      ingredients: ingredient,
+      image: image,
+      directions: directions,
+      likes: 0
+    })
+  }).then(res => res.json())
+  .then(newRecipe => {
+    console.log(newRecipe)
+    let li = document.createElement('li');
+    li.dataset.id = newRecipe.id;
+    li.id = 'recipe-name';
+    li.className = 'recipe'
+    li.innerText = newRecipe.name;
+    recipeUL.append(li);
+  })
+
+
+
+}//END OF addRecipe FUNCTION
+
 
 
 })//END OF DOMContentLoaded
