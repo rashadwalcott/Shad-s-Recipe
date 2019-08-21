@@ -4,6 +4,7 @@ class CreateRecipes < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :image
       t.text :directions
+      t.integer :likes
 
       t.timestamps
     end

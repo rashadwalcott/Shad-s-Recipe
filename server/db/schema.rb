@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20190819204616) do
     t.string "name"
     t.string "image"
     t.text "directions"
+    t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
