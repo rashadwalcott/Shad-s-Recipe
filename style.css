@@ -1,6 +1,7 @@
 body {
   background-image: url("main-background-xs.jpg");
   margin: 0;
+  background-attachment: fixed;
   font-family: monospace;
   color: white;
   /* display: grid;
@@ -37,6 +38,11 @@ div#create-recipe {
 width: 50%;
 display: none;
 }
+
+div#create-comment {
+  width: 50%;
+  /* display: none; */
+}
 .input-text {
   width: 100%;
   padding: 12px 20px;
@@ -63,6 +69,7 @@ div.rightShow {
   float:right;
   width:50%;
   height: auto;
+  overflow: scroll;
   color: white;
 }
 

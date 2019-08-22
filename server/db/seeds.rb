@@ -36,3 +36,53 @@ Recipe.create(name: "Buffalo Chicken Wrap",likes: 0,ingredients: "Cheese,
    Lay out the flour tortillas and divide the chicken evenly among the tortillas.
    Top the chicken with lettuce, celery, and blue cheese dressing.
   Fold in the sides of the tortilla and roll the wrap burrito-style.")
+
+  Recipe.create(name: "Raisin Rice", likes:0, ingredients: "2 cups rice
+      1 cup raisins
+      1/2 onion
+      4 cloves garlic
+      2 stems scallions
+      1 stem celery
+      2 stem fine thyme
+      1/2 cup corn
+      approx 3 sweet peppers different colours
+      carrot
+      chicken
+      cube to taste
+      paprika
+      1/2 tsp. mustard
+      2 tsp. margarine
+      black pepper
+      pepper to taste", image: "https://www.realniceguyana.com/wp-content/uploads/2019/06/Raisin-rice-recipe.jpg",directions: "1. Boil rice and let cool, you can prepare hours before
+      2. chop and prepare all seasonings
+      3. heat pan and add the margarine
+      4. add onion, sweet peppers and carrots and fry for 2 mins
+      5. add raisins, mustard and all the rest of seasonings, fry for a little bit, add salt to taste
+      6. add rice and fry for a bit .
+      7. make adjustments That's it, Enjoy!")
+
+      Recipe.create(name: "Tamarind Ball",likes:0,ingredients: "1 1/2 cups sugar
+        1 lb. ripe tamarind
+        2 cloves garlic
+        pepper to taste",image: "https://www.realniceguyana.com/wp-content/uploads/2019/06/TAMARIND-BALL1.jpg",
+      directions:" 1. Grind garlic and pepper in a mortar
+      2. add that and sugar to the tamarind
+      3. mix together
+      4. form into balls")
+
+      Recipe.create(name:"Sijan Bhaji with Shrimp", likes:0,ingredients: "1/2 pound approx. Sijan leaves
+        Shrimp
+        4 cloves garlic
+        3 stems scallions
+        1/2 onion
+        milk from 1/2 coconut or half of the box of cream
+        pepper to taste
+        salt to taste",directions:"1. prepare ingredients, crush garlic and pepper
+        2. heat oil in pan, add shimp, a bit salt and black pepper and fry for about 30 sec.
+        3. add scallions, onions and the garlic
+        4. fry for approx. 2 mins.
+        5. now it's time to add the bhaji
+        6. add salt and black pepper to
+        7. add coconot milk
+        8. let boil, then add some water
+        9. cook on low heat That's it, enjoy.")
