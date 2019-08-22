@@ -1,26 +1,33 @@
 //Shad's Recipes
 document.addEventListener('DOMContentLoaded',()=>{
-console.log("YEA BOY!")
+
 
 //VARIABLES
 
-let hideRecipe = false;
+ let hideRecipe = false;
+ let hideComment = false;
  const recipesURL = 'http://localhost:3000/recipes';
  const commentsURL = 'http://localhost:3000/comments';
  const recipeListDiv = document.getElementById('list-panel');
  const recipeInfoDiv = document.getElementById('show-panel');
  const createDiv = document.getElementById('create-recipe');
+ const hideDiv = document.getElementById('create-comment');
  const recipeUL = document.getElementById('list');
  const form = document.getElementById('newrecipe');
+ const commentForm = document.getElementById('newcomment');
  const likeBtn = document.createElement('button');
  const addBtn = document.getElementById('new-recipe-btn');
+ const commentBtn = document.getElementById('new-comment-btn');
  const recipeTitle = document.createElement('h3');
  const ingredientTitle = document.createElement('h3');
  const directionsTitle = document.createElement('h3');
+ const commentTitle = document.createElement('h3');
  const recipeImage = document.createElement('img');
  const directionsParagraph = document.createElement('p');
+ const commentParagraph = document.createElement('p');
  const ingredientParagraph = document.createElement('p');
  const likeTotal = document.createElement('p');
+ const commentDiv = document.createElement('div');
 
 
 
@@ -54,8 +61,10 @@ form.addEventListener('submit',addRecipe);
 recipeUL.addEventListener('click',deleteRecipe);
 likeBtn.addEventListener('click',addLikes);
 addBtn.addEventListener('click', hideForm);
-
+commentBtn.addEventListener('click', hideCommentForm);
+commentForm.addEventListener('submit',addComment);
 //FUNCTIONS
+
 //DISPLAYS RECIPE INFORMATION TO THE DOM
 function recipeInfo(){
 
@@ -65,7 +74,8 @@ function recipeInfo(){
     fetch(`${recipesURL}/${id}`)
       .then(res => res.json())
         .then(recipeData => {
-          // console.log(recipeData)
+          console.log(recipeData)
+
 
           recipeTitle.id = 'recipe-title';
           recipeTitle.innerText = recipeData.name;
@@ -78,6 +88,22 @@ function recipeInfo(){
           likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE 🥓🍔🍟🍩🍖` ;
           likeTotal.innerText = `${recipeData.likes} LIKES`
 
+
+          commentForm.innerHTML = `
+          <h3> Add New Comment </h3>
+
+          <label for="new-comment">New Comment</label>
+          <br>
+            <input type = "text" data-id = ${recipeData.id} name="name",id="new-comment" placeholder="Enter a new comment...." class="input.text">
+              <br>
+            <label for="user">User</label>
+               <br>
+            <input type = "text" name="user",id="new-user" placeholder="What is your name...." class="input.text">
+                 <br>
+
+              <input id = "add-comment" type="submit" name="submit" value="Add New Comment" class="submit">
+          `
+
           ingredientTitle.id = 'ingredient-title';
           ingredientTitle.innerText = "Ingredients";
           ingredientParagraph.id = 'recipe-ingredient';
@@ -87,14 +113,26 @@ function recipeInfo(){
           directionsTitle.innerText = "Directions";
           directionsParagraph.innerText = recipeData.directions;
 
+          console.log(recipeData.comments)
+        recipeData.comments.forEach(comment =>{
+          console.log(comment.content)
+        })
+        commentTitle.innerText = "Comments";
+        commentParagraph.innerText = recipeData.comments;
+
           recipeInfoDiv.append(recipeTitle);
           recipeInfoDiv.append(recipeImage);
+
           recipeInfoDiv.append(likeTotal);
           recipeInfoDiv.append(likeBtn);
+          recipeInfoDiv.append(commentDiv);
+
           recipeInfoDiv.append(ingredientTitle);
           recipeInfoDiv.append(ingredientParagraph);
           recipeInfoDiv.append(directionsTitle);
           recipeInfoDiv.append(directionsParagraph);
+          recipeInfoDiv.append(commentTitle);
+          recipeInfoDiv.append(commentParagraph);
 
 
         })
@@ -127,7 +165,7 @@ function addRecipe(event){
     })
   }).then(res => res.json())
   .then(newRecipe => {
-    console.log(ingredient)
+
     console.log(newRecipe)
     let li = document.createElement('li');
     li.dataset.id = newRecipe.id;
@@ -167,6 +205,16 @@ fetch(`${recipesURL}/${id}`,{
 }
 //END OF addLikes FUNCTION
 
+//ADDING COMMENTS
+function addComment(event){
+  event.preventDefault();
+
+  let content = event.target.name.value;
+  let name = event.target.user.value;
+  // let recipe =
+
+
+}//END OF addComment FUNCTION
 
 //DELETE RECIPES
 function deleteRecipe(){
@@ -190,6 +238,17 @@ function hideForm () {
     createDiv.style.display = 'block'
   } else {
     createDiv.style.display = 'none'
+  }
+}
+
+function hideCommentForm() {
+  //hide & seek with the form
+  hideComment = !hideComment
+  if(hideComment){
+    commentForm.style.display = 'block'
+  }
+  else {
+    commentForm.style.display = 'none'
   }
 }
 
