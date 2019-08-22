@@ -4,19 +4,23 @@ console.log("YEA BOY!")
 
 //VARIABLES
 
+let hideRecipe = false;
  const recipesURL = 'http://localhost:3000/recipes';
  const commentsURL = 'http://localhost:3000/comments';
  const recipeListDiv = document.getElementById('list-panel');
  const recipeInfoDiv = document.getElementById('show-panel');
+ const createDiv = document.getElementById('create-recipe');
  const recipeUL = document.getElementById('list');
  const form = document.getElementById('newrecipe');
  const likeBtn = document.createElement('button');
+ const addBtn = document.getElementById('new-recipe-btn');
  const recipeTitle = document.createElement('h3');
  const ingredientTitle = document.createElement('h3');
  const directionsTitle = document.createElement('h3');
  const recipeImage = document.createElement('img');
  const directionsParagraph = document.createElement('p');
  const ingredientParagraph = document.createElement('p');
+ const likeTotal = document.createElement('p');
 
 
 
@@ -32,8 +36,10 @@ fetch(recipesURL)
             li.id = 'recipe-name';
             li.className = 'recipe'
             li.innerText = recipe.name;
+
             let deleteBtn = document.createElement('button');
             deleteBtn.id = 'delete';
+            deleteBtn.className = 'delete-btn'
             deleteBtn.dataset.id = recipe.id;
             deleteBtn.innerText = "✌🏾";
             li.append(deleteBtn);
@@ -45,39 +51,45 @@ fetch(recipesURL)
 //EVENT LISTENERS
 recipeUL.addEventListener('click',recipeInfo);
 form.addEventListener('submit',addRecipe);
-
-
+recipeUL.addEventListener('click',deleteRecipe);
+likeBtn.addEventListener('click',addLikes);
+addBtn.addEventListener('click', hideForm);
 
 //FUNCTIONS
 //DISPLAYS RECIPE INFORMATION TO THE DOM
 function recipeInfo(){
 
   let id = event.target.dataset.id;
-  let recipeIngredient;
+
   if(event.target.id === 'recipe-name'){
     fetch(`${recipesURL}/${id}`)
       .then(res => res.json())
         .then(recipeData => {
-          console.log(recipeData)
+          // console.log(recipeData)
 
           recipeTitle.id = 'recipe-title';
           recipeTitle.innerText = recipeData.name;
           recipeImage.src = recipeData.image;
+          recipeImage.style = "width:600px;height:500px";
+
           likeBtn.dataset.id = recipeData.id;
           likeBtn.id = 'like-button';
-          likeBtn.className = "like"
-          likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE: ${recipeData.likes} 🥓🍔🍟🍩🍖` ;
-          recipeImage.style = "width:600px;height:500px";
+          likeBtn.className = "like";
+          likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE 🥓🍔🍟🍩🍖` ;
+          likeTotal.innerText = `${recipeData.likes} LIKES`
+
           ingredientTitle.id = 'ingredient-title';
           ingredientTitle.innerText = "Ingredients";
           ingredientParagraph.id = 'recipe-ingredient';
           ingredientParagraph.className = 'ingredient';
           ingredientParagraph.innerText = recipeData.ingredients;
+
           directionsTitle.innerText = "Directions";
           directionsParagraph.innerText = recipeData.directions;
 
           recipeInfoDiv.append(recipeTitle);
           recipeInfoDiv.append(recipeImage);
+          recipeInfoDiv.append(likeTotal);
           recipeInfoDiv.append(likeBtn);
           recipeInfoDiv.append(ingredientTitle);
           recipeInfoDiv.append(ingredientParagraph);
@@ -124,7 +136,8 @@ function addRecipe(event){
     li.innerText = newRecipe.name;
     let deleteBtn = document.createElement('button');
     deleteBtn.id = 'delete';
-    deleteBtn.dataset.id = recipe.id;
+    deleteBtn.className = 'delete-btn'
+    deleteBtn.dataset.id = newRecipe.id;
     deleteBtn.innerText = "✌🏾";
     li.append(deleteBtn);
     recipeUL.append(li);
@@ -134,6 +147,51 @@ function addRecipe(event){
 
 }//END OF addRecipe FUNCTION
 
+//ADD LIKES
+function addLikes(){
+let currentLikes = parseInt(event.target.previousElementSibling.innerText);
+let newLikes = currentLikes + 1;
+event.target.previousElementSibling.innerText = newLikes + " Likes";
+let id = event.target.dataset.id;
+fetch(`${recipesURL}/${id}`,{
+  method: 'PATCH',
+  headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        likes:newLikes
+      })
+})
+
+
+}
+//END OF addLikes FUNCTION
+
+
+//DELETE RECIPES
+function deleteRecipe(){
+  let parentElement = event.target.parentElement;
+  let id = event.target.dataset.id;
+
+  if(event.target.classList.contains('delete-btn')){
+  fetch(`${recipesURL}/${id}`,{
+    method: "DELETE"
+}).then(data => {
+  parentElement.remove();
+})
+}
+
+}//END OF deleteRecipe FUNCTION
+
+function hideForm () {
+  // hide & seek with the form
+  hideRecipe = !hideRecipe
+  if (hideRecipe) {
+    createDiv.style.display = 'block'
+  } else {
+    createDiv.style.display = 'none'
+  }
+}
 
 
 })//END OF DOMContentLoaded
