@@ -66,7 +66,7 @@ recipeUL.addEventListener('click',deleteRecipe);
 likeBtn.addEventListener('click',addLikes);
 addBtn.addEventListener('click', hideForm);
 // commentBtn.addEventListener('click', hideCommentForm);
-commentForm.addEventListener('submit',addComment);
+commentDiv.addEventListener('submit',addComment);
 commentUL.addEventListener('click',deleteComment);
 //FUNCTIONS
 
@@ -94,7 +94,8 @@ function recipeInfo(){
           likeTotal.innerText = `${recipeData.likes} LIKES`
 
 
-          commentForm.innerHTML = `
+          commentDiv.innerHTML = `
+          <form id = "newcomment" class = "add-new-comment-form">
           <h3> Add New Comment </h3>
 
           <label for="new-comment">New Comment</label>
@@ -107,6 +108,7 @@ function recipeInfo(){
                  <br>
 
               <input data-id = ${recipeData.id}  id = "add-comment" type="submit" name="submit" value="Add New Comment" class="submit">
+              </form>
           `
 
           ingredientTitle.id = 'ingredient-title';
@@ -136,12 +138,13 @@ function recipeInfo(){
 
           recipeInfoDiv.append(likeTotal);
           recipeInfoDiv.append(likeBtn);
-          recipeInfoDiv.append(commentDiv);
+
 
           recipeInfoDiv.append(ingredientTitle);
           recipeInfoDiv.append(ingredientParagraph);
           recipeInfoDiv.append(directionsTitle);
           recipeInfoDiv.append(directionsParagraph);
+          recipeInfoDiv.append(commentDiv);
           recipeInfoDiv.append(commentTitle);
           recipeInfoDiv.append(commentUL);
 
