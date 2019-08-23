@@ -93,7 +93,7 @@ function recipeInfo(){
           likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE 🥓🍔🍟🍩🍖` ;
           likeTotal.innerText = `${recipeData.likes} LIKES`
 
-
+          commentDiv.className = 'comment-div'
           commentDiv.innerHTML = `
           <form id = "newcomment" class = "add-new-comment-form">
           <h3> Add New Comment </h3>
