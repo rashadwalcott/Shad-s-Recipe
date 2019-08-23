@@ -5,6 +5,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
 
+    # render json: @recipes, includes: [:ingredients]
     render json: @recipes.map{ |recipe| {name: recipe.name, id: recipe.id, image: recipe.image, likes: recipe.likes, ingredients:recipe.ingredients}}
   end
 
