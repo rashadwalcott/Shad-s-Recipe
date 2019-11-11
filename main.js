@@ -51,7 +51,7 @@ fetch(recipesURL)
             deleteBtn.id = 'delete';
             deleteBtn.className = 'delete-btn'
             deleteBtn.dataset.id = recipe.id;
-            deleteBtn.innerText = "✌🏾";
+            deleteBtn.innerText = "✌🏾"; 
             li.append(deleteBtn);
             recipeUL.append(li);
 
@@ -123,7 +123,9 @@ function recipeInfo(){
           commentTitle.innerText = "Comments";
 
           commentUL.id="comments"
+          commentUL.innerHTML = "";
           recipeData.comments.forEach(comment => {
+
             commentUL.innerHTML +=
               `<li class='comment-card'>
                   <blockquote class="blockquote">
