@@ -6,12 +6,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 
  let hideRecipe = false;
  let hideComment = false;
+
  const recipesURL = 'http://localhost:3000/recipes';
  const commentsURL = 'http://localhost:3000/comments';
+
  const recipeListDiv = document.getElementById('list-panel');
  const recipeInfoDiv = document.getElementById('show-panel');
  const createDiv = document.getElementById('create-recipe');
  const hideDiv = document.getElementById('create-comment');
+  const commentDiv = document.createElement('div');
  const recipeUL = document.getElementById('list');
  const form = document.getElementById('newrecipe');
  const commentForm = document.getElementById('newcomment');
@@ -24,13 +27,13 @@ document.addEventListener('DOMContentLoaded',()=>{
  const commentTitle = document.createElement('h3');
  const recipeImage = document.createElement('img');
  const directionsParagraph = document.createElement('p');
- const commentParagraph = document.createElement('p');
+ const commentUL = document.createElement('ul');
  const ingredientParagraph = document.createElement('p');
  const likeTotal = document.createElement('p');
- const commentDiv = document.createElement('div');
 
 
 
+//FIRST FETCH TO SHOW RECIPE NAMES ON SCREEN
 fetch(recipesURL)
   .then(res => res.json())
     .then(recipes => {
@@ -48,9 +51,10 @@ fetch(recipesURL)
             deleteBtn.id = 'delete';
             deleteBtn.className = 'delete-btn'
             deleteBtn.dataset.id = recipe.id;
-            deleteBtn.innerText = "✌🏾";
+            deleteBtn.innerText = "✌🏾"; 
             li.append(deleteBtn);
             recipeUL.append(li);
+
 
   })
 })
@@ -61,8 +65,9 @@ form.addEventListener('submit',addRecipe);
 recipeUL.addEventListener('click',deleteRecipe);
 likeBtn.addEventListener('click',addLikes);
 addBtn.addEventListener('click', hideForm);
-commentBtn.addEventListener('click', hideCommentForm);
-commentForm.addEventListener('submit',addComment);
+// commentBtn.addEventListener('click', hideCommentForm);
+commentDiv.addEventListener('submit',addComment);
+commentUL.addEventListener('click',deleteComment);
 //FUNCTIONS
 
 //DISPLAYS RECIPE INFORMATION TO THE DOM
@@ -88,20 +93,22 @@ function recipeInfo(){
           likeBtn.innerText = ` 🍗🍜🍙🍕🌮 LIKE 🥓🍔🍟🍩🍖` ;
           likeTotal.innerText = `${recipeData.likes} LIKES`
 
-
-          commentForm.innerHTML = `
+          commentDiv.className = 'comment-div'
+          commentDiv.innerHTML = `
+          <form id = "newcomment" class = "add-new-comment-form">
           <h3> Add New Comment </h3>
 
           <label for="new-comment">New Comment</label>
           <br>
-            <input type = "text" data-id = ${recipeData.id} name="name",id="new-comment" placeholder="Enter a new comment...." class="input.text">
+            <input type = "text" name="name" id="new-comment" placeholder="Enter a new comment...." class="input.text">
               <br>
             <label for="user">User</label>
                <br>
-            <input type = "text" name="user",id="new-user" placeholder="What is your name...." class="input.text">
+            <input type = "text" name="user" id="new-user" placeholder="What is your name...." class="input.text">
                  <br>
 
-              <input id = "add-comment" type="submit" name="submit" value="Add New Comment" class="submit">
+              <input data-id = ${recipeData.id}  id = "add-comment" type="submit" name="submit" value="Add New Comment" class="submit">
+              </form>
           `
 
           ingredientTitle.id = 'ingredient-title';
@@ -113,26 +120,35 @@ function recipeInfo(){
           directionsTitle.innerText = "Directions";
           directionsParagraph.innerText = recipeData.directions;
 
-          console.log(recipeData.comments)
-        recipeData.comments.forEach(comment =>{
-          console.log(comment.content)
-        })
-        commentTitle.innerText = "Comments";
-        commentParagraph.innerText = recipeData.comments;
+          commentTitle.innerText = "Comments";
+
+          commentUL.id="comments"
+          commentUL.innerHTML = "";
+          recipeData.comments.forEach(comment => {
+
+            commentUL.innerHTML +=
+              `<li class='comment-card'>
+                  <blockquote class="blockquote">
+                  <p class="mb-0">${comment.content}</p>
+                    <footer class="blockquote-footer">- ${comment.user}</footer>
+                      <button class = "deletecomment" data-id = ${comment.id}>␡</button>
+                `
+          })
 
           recipeInfoDiv.append(recipeTitle);
           recipeInfoDiv.append(recipeImage);
 
           recipeInfoDiv.append(likeTotal);
           recipeInfoDiv.append(likeBtn);
-          recipeInfoDiv.append(commentDiv);
+
 
           recipeInfoDiv.append(ingredientTitle);
           recipeInfoDiv.append(ingredientParagraph);
           recipeInfoDiv.append(directionsTitle);
           recipeInfoDiv.append(directionsParagraph);
+          recipeInfoDiv.append(commentDiv);
           recipeInfoDiv.append(commentTitle);
-          recipeInfoDiv.append(commentParagraph);
+          recipeInfoDiv.append(commentUL);
 
 
         })
@@ -209,9 +225,36 @@ fetch(`${recipesURL}/${id}`,{
 function addComment(event){
   event.preventDefault();
 
+  console.log(event.target)
+
   let content = event.target.name.value;
   let name = event.target.user.value;
-  // let recipe =
+  let recipe = event.target[2].dataset.id
+
+  fetch(`${commentsURL}`,{
+    method: 'POST',
+    headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: content,
+          user: name,
+          recipe_id: recipe
+        })
+  }).then(res => res.json())
+  .then(comments => {
+
+    commentTitle.innerText = "Comments";
+
+      commentUL.innerHTML +=
+        `<li class='comment-card'>
+            <blockquote class="blockquote">
+          <p class="mb-0">${comments.content}</p>
+          <footer class="blockquote-footer">- ${comments.user}</footer>
+          <button class = "deletecomment" data-id = ${comments.id}>␡</button>
+          `
+
+  })
 
 
 }//END OF addComment FUNCTION
@@ -231,6 +274,21 @@ function deleteRecipe(){
 
 }//END OF deleteRecipe FUNCTION
 
+function deleteComment(){
+let parentElement = event.target.parentElement.parentElement;
+let id = event.target.dataset.id;
+
+// console.log(event.target.parentElement.parentElement)
+if(event.target.classList.contains("deletecomment")){
+  fetch(`${commentsURL}/${id}`,{
+    method: 'DELETE'
+  }).then(data => {
+    parentElement.remove();
+  })
+}
+
+}//END OF deleteComment FUNCTION
+
 function hideForm () {
   // hide & seek with the form
   hideRecipe = !hideRecipe
@@ -241,16 +299,16 @@ function hideForm () {
   }
 }
 
-function hideCommentForm() {
-  //hide & seek with the form
-  hideComment = !hideComment
-  if(hideComment){
-    commentForm.style.display = 'block'
-  }
-  else {
-    commentForm.style.display = 'none'
-  }
-}
+// function hideCommentForm() {
+//   //hide & seek with the form
+//   hideComment = !hideComment
+//   if(hideComment){
+//     commentForm.style.display = 'block'
+//   }
+//   else {
+//     commentForm.style.display = 'none'
+//   }
+// }
 
 
 })//END OF DOMContentLoaded

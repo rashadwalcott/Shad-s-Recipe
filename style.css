@@ -2,6 +2,7 @@ body {
   background-image: url("main-background-xs.jpg");
   margin: 0;
   background-attachment: fixed;
+  background-size:cover;
   font-family: monospace;
   color: white;
   /* display: grid;
@@ -41,13 +42,15 @@ display: none;
 
 div#create-comment {
   width: 50%;
+  /* display: flex; */
+  align-items: flex-end;
   /* display: none; */
 }
-.input-text {
+input {
   width: 100%;
-  padding: 12px 20px;
+  /* padding: 12px 20px;
   margin: 8px 0;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 button#delete {
@@ -58,18 +61,24 @@ button#delete {
   height: auto;
 
 } */
+
+.container {
+  display: flex;
+  /* flex-direction: row; */
+}
+
 div.leftShow {
-  float: left;
+  /* float: left;
   width:85%;
-  height: auto;
+  overflow: scroll;*/
   color: white;
 
 }
 div.rightShow {
-  float:right;
+  /* float:right;
   width:50%;
   height: auto;
-  overflow: scroll;
+  overflow: scroll;*/
   color: white;
 }
 

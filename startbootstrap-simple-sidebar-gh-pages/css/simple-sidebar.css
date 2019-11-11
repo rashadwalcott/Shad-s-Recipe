@@ -1,0 +1,162 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+body {
+  /* overflow-x: hidden; */
+  background-image: url("main-background-xs.jpg");
+/* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTysM1qR0YnwFLlzaWY0uUBKt9Mo0uVVVnpHJ40-ai01zXMaWFXBA"); */
+  margin: 0;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size:cover;
+  font-family: monospace;
+  color: white;
+}
+
+div.header {
+  text-align: center;
+  /* border-style: double white; */
+}
+
+div#create-recipe {
+width: 50%;
+display: none;
+position: fixed;
+  bottom: 0;
+  left: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  /* background-image: url('https://png.pngtree.com/thumb_back/fw800/back_pic/03/96/73/4657edf6902aecb.jpg'); */
+ background-image: url('https://media.istockphoto.com/photos/herbs-and-spices-on-slate-background-picture-id599879680?k=6&m=599879680&s=612x612&w=0&h=kJFK5dRELQYXLu7G5FuTeNYqtvuSDQSPVXFVJX8F8I0=');
+
+}
+
+#comments {
+background-image: url('http://www.ecurry.com/blog/wp-content/uploads/2014/01/Roasting-Chestnuts-7-768x1024.jpg');
+/* background-attachment: fixed; */
+border-radius: 1em;
+opacity: 0.9;
+
+}
+div.comment-div {
+  /* background-image: url('https://png.pngtree.com/thumb_back/fh260/back_pic/03/70/92/9057b6fa2816639.jpg'); */
+    /* height: 10px;
+    width: 10px; */
+}
+
+
+
+.recipe {
+  border-radius: 5px;
+  height: 3rem;
+  width: 60%;
+  font-size: 23px;
+  font-family: monospace;
+  margin: 3px;
+  color: white;
+  text-shadow: 3px 2px black;
+
+}
+
+div.leftShow {
+  float: left;
+  width:50%;
+  overflow: scroll;
+  color: white;
+
+}
+
+div.rightShow {
+  float:right;
+  width:50%;
+  overflow: scroll;
+  color: white;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+button.like {
+  text-align: center;
+  color: black;
+  display: inline-block;
+  font-size: 24px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 2px solid #008CBA;
+}
+
+
+button.like:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+button.newbutton {
+  font-size: 24px;
+  padding: 5px 5px;
+}
+
+/* button.newbutton:hover {
+  background-color: #008CBA;
+  color: white;
+} */
+
+
+input {
+  width: 40%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 15px;
+}
+
+p {
+  font-size: 20px;
+  padding: 10px 15px;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
